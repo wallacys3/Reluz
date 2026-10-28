@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 
@@ -54,11 +53,10 @@ export default function WorkGallery() {
                 transition={{ delay: i * 0.1 }}
                 className="relative aspect-square border border-brand-white/5 overflow-hidden group"
               >
-                <Image
+                <img
                   src={img.imageUrl}
                   alt={img.title}
-                  fill
-                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-brand-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center gap-2">

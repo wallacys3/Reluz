@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Sparkles, Shield, Droplets, Loader2 } from 'lucide-react';
 
@@ -72,12 +71,11 @@ export default function ServicesSummary() {
                   transition={{ delay: index * 0.2, duration: 0.5 }}
                   className="group relative bg-brand-black border border-brand-white/5 overflow-hidden"
                 >
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
+                  <div className="relative h-64 overflow-hidden bg-brand-black">
+                    <img
                       src={service.imageUrl || '/src/assets/images/hero_car_detail_1793147455460.jpg'}
                       alt={service.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 brightness-75"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-75"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-black to-transparent" />

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import Image from 'next/image';
+
 import { X, Maximize2, Loader2 } from 'lucide-react';
 
 interface GalleryItem {
@@ -92,11 +92,10 @@ export default function GaleriaPage() {
                   className="group relative aspect-square bg-brand-graphite border border-brand-white/5 overflow-hidden cursor-pointer"
                   onClick={() => setSelectedImage(item)}
                 >
-                  <Image
+                  <img
                     src={item.imageUrl}
                     alt={item.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-brand-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-4">
@@ -140,11 +139,10 @@ export default function GaleriaPage() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative w-full flex-grow">
-                <Image
+                <img
                   src={selectedImage.imageUrl}
                   alt={selectedImage.title}
-                  fill
-                  className="object-contain"
+                  className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>

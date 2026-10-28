@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import Image from 'next/image';
+
 import Link from 'next/link';
 
 const articles = [
@@ -60,11 +60,10 @@ export default function DicasPage() {
             className="group flex flex-col"
           >
             <div className="relative aspect-[16/10] overflow-hidden mb-8 border border-brand-white/5">
-              <Image
+              <img
                 src={article.image}
                 alt={article.title}
-                fill
-                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute top-4 left-4 bg-brand-gold text-brand-black px-3 py-1 text-[10px] font-bold uppercase tracking-widest">

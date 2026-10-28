@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import Image from 'next/image';
+
 
 export default function SobrePage() {
   return (
@@ -32,11 +32,10 @@ export default function SobrePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="relative aspect-square border border-brand-gold/20 overflow-hidden">
-              <Image
+              <img
                 src="/src/assets/images/hero_car_detail_1793147455460.jpg"
                 alt="Nossa oficina"
-                fill
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 referrerPolicy="no-referrer"
               />
             </div>

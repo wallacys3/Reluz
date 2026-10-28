@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Pencil, Trash2, Save, X, Loader2, Image as ImageIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface Service {
   id: number;
@@ -23,20 +24,22 @@ export default function AdminServicos() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    fetchServices();
-  }, []);
-
-  const fetchServices = async () => {
-    try {
-      const res = await fetch('/api/services');
-      const data = await res.json();
-      setServices(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
+    let isMounted = true;
+    async function load() {
+      setLoading(true);
+      try {
+        const res = await fetch('/api/services');
+        const data = await res.json();
+        if (isMounted) setServices(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
     }
-  };
+    load();
+    return () => { isMounted = false; };
+  }, []);
 
   const handleEdit = (service: Service) => {
     setCurrentService(service);
@@ -80,7 +83,9 @@ export default function AdminServicos() {
 
       if (res.ok) {
         setIsModalOpen(false);
-        fetchServices();
+        const resList = await fetch('/api/services');
+        const data = await resList.json();
+        setServices(data);
       }
     } catch (err) {
       console.error(err);
@@ -110,8 +115,8 @@ export default function AdminServicos() {
           <p className="text-[10px] uppercase tracking-widest font-bold">Carregando serviços...</p>
         </div>
       ) : (
-        <div className="bg-brand-graphite border border-brand-white/5">
-          <table className="w-full text-left">
+        <div className="bg-brand-graphite border border-brand-white/5 overflow-x-auto">
+          <table className="w-full text-left min-w-[800px]">
             <thead>
               <tr className="border-b border-brand-white/5 text-[10px] uppercase tracking-widest text-brand-gray">
                 <th className="px-6 py-5 font-bold">Título</th>
@@ -288,8 +293,4 @@ export default function AdminServicos() {
       </AnimatePresence>
     </div>
   );
-}
-
-function cn(...classes: any[]) {
-  return classes.filter(Boolean).join(' ');
 }

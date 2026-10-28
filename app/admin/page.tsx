@@ -101,10 +101,10 @@ export default function AdminDashboard() {
                 <ArrowUpRight size={16} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Ver Site</span>
               </Link>
-              <button className="text-center p-4 bg-brand-graphite hover:text-brand-gold transition-all flex flex-col items-center gap-2">
+              <Link href="/admin/clientes" className="text-center p-4 bg-brand-graphite hover:text-brand-gold transition-all flex flex-col items-center gap-2">
                 <Users size={16} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Clientes</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

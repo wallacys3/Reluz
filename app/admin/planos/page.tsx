@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Plus, Pencil, Trash2, Save, X, Loader2, ListPlus } from 'lucide-react';
+import { Plus, Pencil, Trash2, Save, X, Loader2 } from 'lucide-react';
 
 interface Plan {
   id: number;
@@ -23,20 +23,22 @@ export default function AdminPlanos() {
   const [featureInput, setFeatureInput] = useState('');
 
   useEffect(() => {
-    fetchPlans();
-  }, []);
-
-  const fetchPlans = async () => {
-    try {
-      const res = await fetch('/api/plans');
-      const data = await res.json();
-      setPlans(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
+    let isMounted = true;
+    async function load() {
+      setLoading(true);
+      try {
+        const res = await fetch('/api/plans');
+        const data = await res.json();
+        if (isMounted) setPlans(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
     }
-  };
+    load();
+    return () => { isMounted = false; };
+  }, []);
 
   const handleEdit = (plan: Plan) => {
     setCurrentPlan(plan);
@@ -91,7 +93,9 @@ export default function AdminPlanos() {
 
       if (res.ok) {
         setIsModalOpen(false);
-        fetchPlans();
+        const resList = await fetch('/api/plans');
+        const data = await resList.json();
+        setPlans(data);
       }
     } catch (err) {
       console.error(err);

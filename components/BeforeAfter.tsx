@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import Image from 'next/image';
+
 
 export default function BeforeAfter() {
   return (
@@ -56,11 +56,10 @@ export default function BeforeAfter() {
           >
             <div className="absolute -inset-4 bg-brand-gold/10 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity" />
             <div className="relative aspect-[4/3] border border-brand-gold/20 overflow-hidden bg-brand-graphite">
-              <Image
+              <img
                 src="/src/assets/images/gallery_before_after_1793147455342.jpg"
                 alt="Antes e Depois de um Polimento Técnico na Reluz"
-                fill
-                className="object-cover"
+                className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute top-4 left-4 bg-brand-black/80 backdrop-blur px-3 py-1 text-[10px] font-bold uppercase tracking-widest">Antes</div>

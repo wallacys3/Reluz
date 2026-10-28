@@ -77,12 +77,11 @@ export default function ServicosPage() {
                     transition={{ delay: index * 0.1 }}
                     className="bg-brand-graphite border border-brand-white/5 flex flex-col group h-full"
                   >
-                    <div className="relative aspect-[16/9] overflow-hidden">
-                      <Image
+                    <div className="relative aspect-[16/9] overflow-hidden bg-brand-graphite">
+                      <img
                         src={service.imageUrl || '/src/assets/images/hero_car_detail_1793147455460.jpg'}
                         alt={service.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         referrerPolicy="no-referrer"
                       />
                     </div>

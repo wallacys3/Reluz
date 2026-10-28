@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'motion/react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Hero() {
@@ -9,12 +8,10 @@ export default function Hero() {
     <section className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image
+        <img
           src="/src/assets/images/hero_car_detail_1793147455460.jpg"
           alt="Reluz Estética Automotiva - Detalhamento Premium"
-          fill
-          priority
-          className="object-cover brightness-[0.4]"
+          className="w-full h-full object-cover brightness-[0.4]"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/40 to-transparent" />
