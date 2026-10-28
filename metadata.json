@@ -1,0 +1,6 @@
+{
+  "name": "Reluz Estética Automotiva",
+  "description": "Site oficial da Reluz Estética Automotiva. Serviços premium de detalhamento, polimento e higienização automotiva.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
