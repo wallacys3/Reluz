@@ -1,10 +1,43 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { LogIn } from 'lucide-react';
+import { LogIn, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function AdminLogin() {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if already logged in
+    const token = localStorage.getItem('reluz_admin_token');
+    if (token === 'authenticated_adm') {
+      router.push('/admin');
+    }
+  }, [router]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    // Mocking the specific credentials requested: adm / 1234
+    setTimeout(() => {
+      if (login === 'adm' && password === '1234') {
+        localStorage.setItem('reluz_admin_token', 'authenticated_adm');
+        router.push('/admin');
+      } else {
+        setError('Login ou senha incorretos.');
+        setLoading(false);
+      }
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen bg-brand-black flex items-center justify-center p-6">
       <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -25,36 +58,53 @@ export default function AdminLogin() {
               Admin Panel
             </span>
           </Link>
-          <h1 className="text-2xl font-bold mb-2">Bem-vindo de volta</h1>
-          <p className="text-brand-gray text-sm">Acesse o painel administrativo para gerenciar seu negócio.</p>
+          <h1 className="text-2xl font-bold mb-2">Painel de Controle</h1>
+          <p className="text-brand-gray text-sm text-balance">Gerencie os serviços e conteúdos da Reluz Estética Automotiva.</p>
         </div>
 
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {error && (
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 bg-red-500/10 border border-red-500/20 rounded-sm flex items-center gap-3 text-red-500 text-sm font-medium"
+            >
+              <AlertCircle size={18} />
+              {error}
+            </motion.div>
+          )}
+
           <div className="space-y-2">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">E-mail</label>
+            <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Usuário</label>
             <input
-              type="email"
+              type="text"
+              required
               className="w-full bg-brand-black border border-brand-white/10 px-4 py-4 text-sm focus:border-brand-gold outline-none transition-colors"
-              placeholder="seu@email.com"
+              placeholder="Digite o login"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
             />
           </div>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Senha</label>
-              <button type="button" className="text-[10px] font-bold uppercase tracking-widest text-brand-gray hover:text-brand-gold transition-colors">Esqueceu?</button>
             </div>
             <input
               type="password"
+              required
               className="w-full bg-brand-black border border-brand-white/10 px-4 py-4 text-sm focus:border-brand-gold outline-none transition-colors"
               placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-5 bg-brand-gold text-brand-black font-bold uppercase tracking-widest text-sm hover:bg-brand-white transition-all flex items-center justify-center gap-3"
+            disabled={loading}
+            className="w-full py-5 bg-brand-gold text-brand-black font-bold uppercase tracking-widest text-sm hover:bg-brand-white transition-all flex items-center justify-center gap-3 disabled:opacity-50"
           >
-            Entrar no Painel <LogIn size={18} />
+            {loading ? 'Autenticando...' : 'Entrar no Painel'} <LogIn size={18} />
           </button>
         </form>
 

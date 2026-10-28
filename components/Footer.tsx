@@ -39,6 +39,7 @@ export default function Footer() {
             <li><Link href="/planos" className="hover:text-brand-white transition-colors">Planos e Pacotes</Link></li>
             <li><Link href="/galeria" className="hover:text-brand-white transition-colors">Galeria de Resultados</Link></li>
             <li><Link href="/sobre" className="hover:text-brand-white transition-colors">Sobre a Reluz</Link></li>
+            <li className="mt-4 pt-4 border-t border-brand-white/5"><Link href="/admin/login" className="text-[10px] text-brand-gray/30 hover:text-brand-gold transition-colors uppercase tracking-widest">Acesso Administrativo</Link></li>
           </ul>
         </div>
 
