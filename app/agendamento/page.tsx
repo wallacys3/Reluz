@@ -50,7 +50,7 @@ function BookingForm() {
 - Horário: ${formData.horario}
 - Observações: ${formData.observacoes || 'Nenhuma'}`;
 
-      window.open(formatWhatsAppLink('5511999999999', message), '_blank');
+      window.open(formatWhatsAppLink('557988594996', message), '_blank');
       
       setIsSuccess(true);
       setFormData({

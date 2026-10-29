@@ -54,7 +54,6 @@ export async function PUT(req: NextRequest) {
         category,
         imageUrl,
         isActive,
-        updatedAt: new Date(),
       })
       .where(eq(services.id, id))
       .returning();

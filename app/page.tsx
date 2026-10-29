@@ -8,7 +8,7 @@ import WorkGallery from '@/components/WorkGallery';
 import Link from 'next/link';
 
 export default function Home() {
-  const [whatsapp, setWhatsapp] = useState('5511999999999');
+  const [whatsapp, setWhatsapp] = useState('557988594996');
 
   useEffect(() => {
     fetch('/api/settings')

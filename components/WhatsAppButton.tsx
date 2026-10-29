@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 export default function WhatsAppButton() {
   const pathname = usePathname();
-  const [whatsapp, setWhatsapp] = useState('5511999999999');
+  const [whatsapp, setWhatsapp] = useState('557988594996');
   
   useEffect(() => {
     fetch('/api/settings')

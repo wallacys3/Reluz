@@ -60,7 +60,7 @@ export default function Footer() {
           <ul className="flex flex-col gap-5 text-sm text-brand-gray">
             <li className="flex items-start gap-3">
               <Phone size={18} className="text-brand-gold shrink-0" />
-              <span>{settings?.whatsapp || '(11) 99999-9999'}</span>
+              <span>{settings?.whatsapp || '79 8859-4996'}</span>
             </li>
             <li className="flex items-start gap-3">
               <Mail size={18} className="text-brand-gold shrink-0" />
@@ -68,7 +68,7 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-brand-gold shrink-0" />
-              <span className="whitespace-pre-line">{settings?.address || 'Rua Exemplo, 123 - Bairro\nCidade - Estado'}</span>
+              <span className="whitespace-pre-line">{settings?.address || 'Rua Siriri, 90 - Centro\nAracaju - Sergipe'}</span>
             </li>
           </ul>
         </div>

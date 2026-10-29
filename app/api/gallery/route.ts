@@ -29,7 +29,6 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const newItem = await db.insert(gallery).values({
       title: body.title,
-      description: body.description,
       imageUrl: body.imageUrl,
       category: body.category || 'Geral',
       isActive: body.isActive !== undefined ? body.isActive : true,
