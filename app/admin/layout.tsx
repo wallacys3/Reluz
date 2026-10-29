@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { LayoutDashboard, Scissors, Package, Image as ImageIcon, FileText, Settings, LogOut, ChevronRight, Menu, X, Users, ShoppingBag, DollarSign } from 'lucide-react';
+import { LayoutDashboard, Scissors, Package, Image as ImageIcon, FileText, Settings, LogOut, ChevronRight, Menu, X, Users, ShoppingBag, DollarSign, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const sidebarLinks = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { name: 'Agendamentos', href: '/admin/agendamentos', icon: Calendar },
   { name: 'Vendas', href: '/admin/vendas', icon: DollarSign },
   { name: 'Serviços', href: '/admin/servicos', icon: Scissors },
   { name: 'Produtos', href: '/admin/produtos', icon: ShoppingBag },
