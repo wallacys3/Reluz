@@ -26,6 +26,44 @@ export default function Home() {
       <BeforeAfter />
       <WorkGallery />
       
+      {/* Payment Methods Section */}
+      <section className="py-16 bg-brand-black border-t border-brand-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 bg-brand-graphite/30 p-10 border border-brand-white/5">
+            <div className="max-w-md">
+              <h3 className="text-brand-gold font-bold uppercase tracking-[0.2em] text-xs mb-3">Facilidade para você</h3>
+              <h4 className="text-2xl font-bold text-brand-white mb-4">Formas de Pagamento</h4>
+              <p className="text-brand-gray text-sm leading-relaxed">
+                Oferecemos flexibilidade para que você cuide do seu veículo sem preocupações. Aceitamos as principais bandeiras e modalidades.
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="w-14 h-14 bg-brand-black flex items-center justify-center border border-brand-white/10 group-hover:border-brand-gold transition-colors">
+                  <svg className="text-brand-gold w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gray group-hover:text-brand-white transition-colors">Cartões de Crédito</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="w-14 h-14 bg-brand-black flex items-center justify-center border border-brand-white/10 group-hover:border-brand-gold transition-colors">
+                  <svg className="text-brand-gold w-8 h-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 12l10 10 10-10L12 2zm0 3.5l6.5 6.5-6.5 6.5L5.5 12 12 5.5z"/></svg>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gray group-hover:text-brand-white transition-colors">PIX</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="w-14 h-14 bg-brand-black flex items-center justify-center border border-brand-white/10 group-hover:border-brand-gold transition-colors">
+                  <svg className="text-brand-gold w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gray group-hover:text-brand-white transition-colors">Dinheiro</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* Testimonials Placeholder */}
       <section className="py-24 bg-brand-graphite border-y border-brand-white/5">
         <div className="max-w-7xl mx-auto px-6 text-center">
