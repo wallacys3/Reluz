@@ -1,8 +1,19 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Instagram, Facebook, Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 export default function Footer() {
+  const [settings, setSettings] = useState<any>(null);
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => setSettings(data))
+      .catch(err => console.error('Error fetching settings for footer:', err));
+  }, []);
 
   return (
     <footer className="bg-brand-black border-t border-brand-white/10 pt-20 pb-10 px-6">
@@ -21,7 +32,7 @@ export default function Footer() {
             Especialistas em detalhamento automotivo premium. Cuidamos do seu veículo com a exclusividade e a tecnologia que ele merece.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="p-2 bg-brand-graphite rounded-full hover:bg-brand-gold hover:text-brand-black transition-all">
+            <a href={`https://instagram.com/${settings?.instagram?.replace('@', '') || ''}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-brand-graphite rounded-full hover:bg-brand-gold hover:text-brand-black transition-all">
               <Instagram size={20} />
             </a>
             <a href="#" className="p-2 bg-brand-graphite rounded-full hover:bg-brand-gold hover:text-brand-black transition-all">
@@ -49,15 +60,15 @@ export default function Footer() {
           <ul className="flex flex-col gap-5 text-sm text-brand-gray">
             <li className="flex items-start gap-3">
               <Phone size={18} className="text-brand-gold shrink-0" />
-              <span>(11) 99999-9999</span>
+              <span>{settings?.whatsapp || '(11) 99999-9999'}</span>
             </li>
             <li className="flex items-start gap-3">
               <Mail size={18} className="text-brand-gold shrink-0" />
-              <span>contato@reluzestetica.com.br</span>
+              <span>{settings?.email || 'contato@reluzestetica.com.br'}</span>
             </li>
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-brand-gold shrink-0" />
-              <span>Rua Exemplo, 123 - Bairro<br />Cidade - Estado</span>
+              <span className="whitespace-pre-line">{settings?.address || 'Rua Exemplo, 123 - Bairro\nCidade - Estado'}</span>
             </li>
           </ul>
         </div>
@@ -70,14 +81,14 @@ export default function Footer() {
               <Clock size={18} className="text-brand-gold" />
               <div>
                 <p className="font-medium text-brand-white">Segunda a Sexta</p>
-                <p>08:00 - 18:00</p>
+                <p>{settings?.hours_week || '08:00 - 18:00'}</p>
               </div>
             </li>
             <li className="flex items-center gap-3">
               <Clock size={18} className="text-brand-gold" />
               <div>
                 <p className="font-medium text-brand-white">Sábado</p>
-                <p>08:00 - 14:00</p>
+                <p>{settings?.hours_sat || '08:00 - 14:00'}</p>
               </div>
             </li>
           </ul>
@@ -91,3 +102,4 @@ export default function Footer() {
     </footer>
   );
 }
+
