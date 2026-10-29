@@ -109,3 +109,15 @@ export const products = pgTable('products', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+// Sales table
+export const sales = pgTable('sales', {
+  id: serial('id').primaryKey(),
+  type: text('type').notNull(), // 'service' | 'product'
+  itemId: integer('item_id'), // Reference ID (optional if item is deleted)
+  itemName: text('item_name').notNull(),
+  quantity: integer('quantity').default(1).notNull(),
+  totalAmount: decimal('total_amount', { precision: 10, scale: 2 }).notNull(),
+  paymentMethod: text('payment_method').notNull(), // 'credit_card', 'pix', 'cash'
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
