@@ -11,7 +11,7 @@ const articles = [
     excerpt: 'Saiba como evitar manchas e riscos na pintura no dia a dia com cuidados simples que fazem toda a diferença.',
     category: 'Cuidados',
     date: '24 Out, 2026',
-    image: '/src/assets/images/hero_car_detail_1793147455460.jpg'
+    image: '/assets/images/hero_car_detail_1793147455460.jpg'
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const articles = [
     excerpt: 'Descubra por que o método de lavagem pode ser o melhor amigo ou o pior inimigo do verniz do seu carro.',
     category: 'Técnica',
     date: '15 Out, 2026',
-    image: '/src/assets/images/service_polishing_1793147456067.jpg'
+    image: '/assets/images/service_polishing_1793147456067.jpg'
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const articles = [
     excerpt: 'O couro é um material orgânico e precisa de hidratação constante para não ressecar e rachar com a exposição ao sol.',
     category: 'Interior',
     date: '02 Out, 2026',
-    image: '/src/assets/images/service_interior_1793147455958.jpg'
+    image: '/assets/images/service_interior_1793147455958.jpg'
   }
 ];
 

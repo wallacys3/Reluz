@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ShoppingBag, Search, Filter, AlertCircle } from 'lucide-react';
+import { ShoppingBag, Search, Filter, AlertCircle, ShoppingCart, Check } from 'lucide-react';
+import { useCart } from '@/components/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,6 +22,8 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [whatsapp, setWhatsapp] = useState('557988594996');
+  const { addItem, items } = useCart();
+  const [addedItems, setAddedItems] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +52,22 @@ export default function ProductsPage() {
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleAddToCart = (product: Product) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: parseFloat(product.price),
+      type: 'product',
+      quantity: 1,
+      imageUrl: product.imageUrl
+    });
+    
+    setAddedItems(prev => ({ ...prev, [product.id]: true }));
+    setTimeout(() => {
+      setAddedItems(prev => ({ ...prev, [product.id]: false }));
+    }, 2000);
+  };
 
   return (
     <div className="bg-brand-black min-h-screen pb-24">
@@ -135,14 +154,23 @@ export default function ProductsPage() {
                       {product.stock} em estoque
                     </span>
                   </div>
-                  <a
-                    href={`https://wa.me/${whatsapp.replace(/\D/g, '')}?text=Olá! Gostaria de comprar o produto: ${product.name}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full py-3 ${product.stock > 0 ? 'bg-brand-gold text-brand-black' : 'bg-brand-white/10 text-brand-gray cursor-not-allowed'} font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all hover:bg-brand-white`}
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    disabled={product.stock <= 0}
+                    className={`w-full py-3 ${
+                      product.stock > 0 
+                        ? (addedItems[product.id] ? 'bg-green-600 text-white' : 'bg-brand-gold text-brand-black') 
+                        : 'bg-brand-white/10 text-brand-gray cursor-not-allowed'
+                    } font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all hover:opacity-90`}
                   >
-                    <ShoppingBag size={14} /> {product.stock > 0 ? 'Comprar pelo WhatsApp' : 'Indisponível'}
-                  </a>
+                    {product.stock <= 0 ? (
+                      <>Indisponível</>
+                    ) : addedItems[product.id] ? (
+                      <><Check size={14} /> Adicionado</>
+                    ) : (
+                      <><ShoppingCart size={14} /> Adicionar ao Carrinho</>
+                    )}
+                  </button>
                 </div>
               </motion.div>
             ))}

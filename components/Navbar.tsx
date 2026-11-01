@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Instagram, Phone } from 'lucide-react';
+import { Menu, X, Instagram, Phone, ShoppingCart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useCart } from '@/components/CartContext';
 
 const navLinks = [
   { name: 'Início', href: '/' },
@@ -22,6 +23,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,6 +75,22 @@ export default function Navbar() {
 
         {/* Zone 3: Primary Action */}
         <div className="flex items-center gap-4 shrink-0">
+          <Link
+            href="/carrinho"
+            className="relative p-2 text-brand-white hover:text-brand-gold transition-colors"
+          >
+            <ShoppingCart size={24} />
+            {totalItems > 0 && (
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute top-0 right-0 bg-brand-gold text-brand-black text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full"
+              >
+                {totalItems}
+              </motion.span>
+            )}
+          </Link>
+
           <Link
             href="/agendamento"
             className="hidden sm:block px-5 py-2.5 text-xs font-bold uppercase tracking-widest bg-brand-gold text-brand-black rounded-sm hover:bg-brand-white transition-all transform hover:scale-105 whitespace-nowrap shrink-0"

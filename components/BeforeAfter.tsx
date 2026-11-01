@@ -57,7 +57,7 @@ export default function BeforeAfter() {
             <div className="absolute -inset-4 bg-brand-gold/10 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity" />
             <div className="relative aspect-[4/3] border border-brand-gold/20 overflow-hidden bg-brand-graphite">
               <img
-                src="/src/assets/images/gallery_before_after_1793147455342.jpg"
+                src="/assets/images/gallery_before_after_1793147455342.jpg"
                 alt="Antes e Depois de um Polimento Técnico na Reluz"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"

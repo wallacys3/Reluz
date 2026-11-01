@@ -19,16 +19,20 @@ export const metadata: Metadata = {
   },
 };
 
+import { CartProvider } from '@/components/CartContext';
+
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="pt-BR" className="scroll-smooth">
       <body suppressHydrationWarning className="bg-brand-black text-brand-white min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow pt-20">
-          {children}
-        </main>
-        <WhatsAppButton />
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-grow pt-20">
+            {children}
+          </main>
+          <WhatsAppButton />
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

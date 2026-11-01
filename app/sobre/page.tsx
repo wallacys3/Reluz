@@ -33,7 +33,7 @@ export default function SobrePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="relative aspect-square border border-brand-gold/20 overflow-hidden">
               <img
-                src="/src/assets/images/hero_car_detail_1793147455460.jpg"
+                src="/assets/images/hero_car_detail_1793147455460.jpg"
                 alt="Nossa oficina"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 referrerPolicy="no-referrer"

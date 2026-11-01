@@ -73,7 +73,7 @@ export default function ServicesSummary() {
                 >
                   <div className="relative h-64 overflow-hidden bg-brand-black">
                     <img
-                      src={service.imageUrl || '/src/assets/images/hero_car_detail_1793147455460.jpg'}
+                      src={service.imageUrl || '/assets/images/hero_car_detail_1793147455460.jpg'}
                       alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-75"
                       referrerPolicy="no-referrer"

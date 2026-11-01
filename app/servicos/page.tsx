@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Check, ArrowRight, Loader2 } from 'lucide-react';
+import { Check, ArrowRight, Loader2, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/components/CartContext';
 
 interface Service {
   id: number;
@@ -19,6 +20,8 @@ interface Service {
 export default function ServicosPage() {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
+  const { addItem } = useCart();
+  const [addedItems, setAddedItems] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     fetch('/api/services')
@@ -34,6 +37,27 @@ export default function ServicosPage() {
   }, []);
 
   const categories = Array.from(new Set(services.map(s => s.category)));
+
+  const handleAddToCart = (service: Service) => {
+    // Try to extract numeric price from string like "A partir de R$ 150"
+    const priceMatch = service.price.match(/R\$\s?(\d+([.,]\d+)?)/);
+    const numericPrice = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
+
+    addItem({
+      id: service.id,
+      name: service.title,
+      price: numericPrice,
+      type: 'service',
+      quantity: 1,
+      imageUrl: service.imageUrl,
+      slug: service.slug
+    });
+    
+    setAddedItems(prev => ({ ...prev, [service.id]: true }));
+    setTimeout(() => {
+      setAddedItems(prev => ({ ...prev, [service.id]: false }));
+    }, 2000);
+  };
 
   return (
     <div className="bg-brand-black min-h-screen pb-24">
@@ -79,7 +103,7 @@ export default function ServicosPage() {
                   >
                     <div className="relative aspect-[16/9] overflow-hidden bg-brand-graphite">
                       <img
-                        src={service.imageUrl || '/src/assets/images/hero_car_detail_1793147455460.jpg'}
+                        src={service.imageUrl || '/assets/images/hero_car_detail_1793147455460.jpg'}
                         alt={service.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         referrerPolicy="no-referrer"
@@ -92,11 +116,23 @@ export default function ServicosPage() {
                         {service.description}
                       </p>
                       <div className="pt-6 border-t border-brand-white/5 mt-auto flex flex-col gap-4">
+                        <button
+                          onClick={() => handleAddToCart(service)}
+                          className={`w-full py-3 ${
+                            addedItems[service.id] ? 'bg-green-600 text-white' : 'bg-brand-gold text-brand-black'
+                          } text-center font-bold uppercase tracking-widest text-[10px] hover:opacity-90 transition-all flex items-center justify-center gap-2`}
+                        >
+                          {addedItems[service.id] ? (
+                            <><Check size={14} /> Adicionado</>
+                          ) : (
+                            <><ShoppingCart size={14} /> Adicionar ao Carrinho</>
+                          )}
+                        </button>
                         <Link
                           href={`/agendamento?plano=${service.slug}`}
-                          className="w-full py-3 bg-brand-gold text-brand-black text-center font-bold uppercase tracking-widest text-[10px] hover:bg-brand-white transition-colors"
+                          className="w-full py-3 border border-brand-white/10 text-brand-white text-center font-bold uppercase tracking-widest text-[10px] hover:bg-brand-white hover:text-brand-black transition-colors"
                         >
-                          Agendar este serviço
+                          Agendar data específica
                         </Link>
                         <a
                           href={`https://wa.me/5511999999999?text=Olá, gostaria de saber mais sobre o serviço de ${service.title}`}

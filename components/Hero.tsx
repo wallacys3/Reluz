@@ -9,7 +9,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/hero_car_detail_1793147455460.jpg"
+          src="/assets/images/hero_car_detail_1793147455460.jpg"
           alt="Reluz Estética Automotiva - Detalhamento Premium"
           className="w-full h-full object-cover brightness-[0.4]"
           referrerPolicy="no-referrer"
