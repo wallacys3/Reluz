@@ -23,6 +23,8 @@ export default function ServicosPage() {
   const { addItem } = useCart();
   const [addedItems, setAddedItems] = useState<Record<number, boolean>>({});
 
+  const [whatsapp, setWhatsapp] = useState('557988594996');
+
   useEffect(() => {
     fetch('/api/services')
       .then(res => res.json())
@@ -34,6 +36,13 @@ export default function ServicosPage() {
         console.error(err);
         setLoading(false);
       });
+
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.whatsapp) setWhatsapp(data.whatsapp);
+      })
+      .catch(err => console.error(err));
   }, []);
 
   const categories = Array.from(new Set(services.map(s => s.category)));
@@ -135,7 +144,7 @@ export default function ServicosPage() {
                           Agendar data específica
                         </Link>
                         <a
-                          href={`https://wa.me/5511999999999?text=Olá, gostaria de saber mais sobre o serviço de ${service.title}`}
+                          href={`https://wa.me/${whatsapp.replace(/\D/g, '')}?text=Olá, gostaria de saber mais sobre o serviço de ${service.title}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-full py-3 border border-brand-white/10 text-brand-white text-center font-bold uppercase tracking-widest text-[10px] hover:bg-brand-white hover:text-brand-black transition-colors flex items-center justify-center gap-2"

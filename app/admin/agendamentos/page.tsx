@@ -66,7 +66,7 @@ export default function AdminAgendamentos() {
 
   useEffect(() => {
     loadData();
-  }, [loadData]);
+  }, []); // Only on mount
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

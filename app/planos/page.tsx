@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { Check, Info, Loader2 } from 'lucide-react';
+import { Check, Info, Loader2, ShoppingCart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useCart } from '@/components/CartContext';
 
 interface Plan {
   id: number;
@@ -19,6 +20,9 @@ interface Plan {
 export default function PlanosPage() {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState(true);
+  const { addItem } = useCart();
+  const [addedItems, setAddedItems] = useState<Record<number, boolean>>({});
+  const [whatsapp, setWhatsapp] = useState('557988594996');
 
   useEffect(() => {
     fetch('/api/plans')
@@ -31,7 +35,30 @@ export default function PlanosPage() {
         console.error(err);
         setLoading(false);
       });
+
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.whatsapp) setWhatsapp(data.whatsapp);
+      })
+      .catch(err => console.error(err));
   }, []);
+
+  const handleAddToCart = (plan: Plan) => {
+    addItem({
+      id: plan.id,
+      name: plan.name,
+      price: parseFloat(plan.price),
+      type: 'service',
+      quantity: 1,
+      imageUrl: '/assets/images/hero_car_detail_1793147455460.jpg' // Default image for plans
+    });
+    
+    setAddedItems(prev => ({ ...prev, [plan.id]: true }));
+    setTimeout(() => {
+      setAddedItems(prev => ({ ...prev, [plan.id]: false }));
+    }, 2000);
+  };
 
   return (
     <div className="bg-brand-black min-h-screen pb-24">
@@ -97,15 +124,35 @@ export default function PlanosPage() {
                 ))}
               </ul>
 
-              <Link
-                href={`/agendamento?plano=${plan.slug}`}
-                className={cn(
-                  "w-full py-5 text-center font-bold uppercase tracking-widest text-xs transition-all",
-                  plan.isPopular ? "bg-brand-gold text-brand-black hover:bg-brand-white" : "bg-brand-white/5 text-brand-white hover:bg-brand-white hover:text-brand-black"
-                )}
-              >
-                Solicitar Orçamento
-              </Link>
+              <div className="flex flex-col gap-4 mt-auto">
+                <button
+                  onClick={() => handleAddToCart(plan)}
+                  className={cn(
+                    "w-full py-4 font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2",
+                    addedItems[plan.id] 
+                      ? "bg-green-600 text-white" 
+                      : (plan.isPopular ? "bg-white text-brand-black hover:bg-brand-black hover:text-white" : "bg-brand-gold text-brand-black hover:bg-white")
+                  )}
+                >
+                  {addedItems[plan.id] ? (
+                    <><Check size={14} /> Adicionado</>
+                  ) : (
+                    <><ShoppingCart size={14} /> Adicionar ao Carrinho</>
+                  )}
+                </button>
+                
+                <Link
+                  href={`/agendamento?plano=${plan.slug}`}
+                  className={cn(
+                    "w-full py-4 text-center font-bold uppercase tracking-widest text-[10px] transition-all",
+                    plan.isPopular 
+                      ? "border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-black" 
+                      : "bg-brand-white/5 text-brand-white hover:bg-brand-white hover:text-brand-black"
+                  )}
+                >
+                  Solicitar Orçamento
+                </Link>
+              </div>
             </motion.div>
           ))
         )}

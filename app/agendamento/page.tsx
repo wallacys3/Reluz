@@ -21,6 +21,17 @@ function BookingForm() {
     observacoes: ''
   });
 
+  const [whatsapp, setWhatsapp] = useState('557988594996');
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.whatsapp) setWhatsapp(data.whatsapp);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -50,7 +61,7 @@ function BookingForm() {
 - Horário: ${formData.horario}
 - Observações: ${formData.observacoes || 'Nenhuma'}`;
 
-      window.open(formatWhatsAppLink('557988594996', message), '_blank');
+      window.open(formatWhatsAppLink(whatsapp, message), '_blank');
       
       setIsSuccess(true);
       setFormData({
