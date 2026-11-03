@@ -94,7 +94,7 @@ export default function AdminVendas() {
         itemId: selectedItemId,
         itemName: selectedItem ? (saleType === 'product' ? (selectedItem as Product).name : (selectedItem as Service).title) : 'Venda Avulsa',
         quantity: saleType === 'product' ? quantity : 1,
-        totalAmount: customPrice || (selectedItem ? (saleType === 'product' ? (selectedItem as Product).price : (selectedItem as Service).price.replace(/\D/g, '')) : '0'),
+        totalAmount: customPrice || (selectedItem ? (saleType === 'product' ? (selectedItem as Product).price : (selectedItem as Service).price.replace(/[^\d.,]/g, '').replace(',', '.')) : '0'),
         paymentMethod,
       };
 

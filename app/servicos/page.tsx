@@ -39,9 +39,9 @@ export default function ServicosPage() {
   const categories = Array.from(new Set(services.map(s => s.category)));
 
   const handleAddToCart = (service: Service) => {
-    // Try to extract numeric price from string like "A partir de R$ 150"
-    const priceMatch = service.price.match(/R\$\s?(\d+([.,]\d+)?)/);
-    const numericPrice = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
+    // Robust price extraction: removes currency symbol and handles both comma and dot as decimal separators
+    const cleanedPrice = service.price.replace(/[^\d.,]/g, '');
+    const numericPrice = parseFloat(cleanedPrice.replace(',', '.')) || 0;
 
     addItem({
       id: service.id,
