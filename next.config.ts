@@ -2,6 +2,7 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -23,10 +24,16 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'universodetailshop.com.br',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   // output: 'standalone',
-  transpilePackages: ['motion'],
+  // transpilePackages: ['motion'],
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.
     // Do not modify—file watching is disabled to prevent flickering during agent edits.

@@ -1,5 +1,5 @@
-import { db } from '@/src/db';
-import { bookings, clients, sales, products } from '@/src/db/schema';
+import { db } from '@/db';
+import { bookings, clients, sales, products } from '@/db/schema';
 import { count, sum, sql } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/src/db';
-import { articles } from '@/src/db/schema';
+import { db } from '@/db';
+import { articles } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
 
 export async function GET(req: NextRequest) {
@@ -8,14 +8,12 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const admin = searchParams.get('admin') === 'true';
 
-    const query = db.select().from(articles);
+    let query = db.select().from(articles).$dynamic();
     
     if (!admin) {
-      // @ts-ignore
-      query.where(eq(articles.isPublished, true));
+      query = query.where(eq(articles.isPublished, true));
     }
 
-    // @ts-ignore
     const data = await query.orderBy(desc(articles.createdAt));
     return NextResponse.json(data);
   } catch (error) {

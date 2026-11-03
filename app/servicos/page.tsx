@@ -49,7 +49,8 @@ export default function ServicosPage() {
 
   const handleAddToCart = (service: Service) => {
     // Robust price extraction: removes currency symbol and handles both comma and dot as decimal separators
-    const cleanedPrice = service.price.replace(/[^\d.,]/g, '');
+    const priceStr = service.price || '0';
+    const cleanedPrice = priceStr.replace(/[^\d.,]/g, '');
     const numericPrice = parseFloat(cleanedPrice.replace(',', '.')) || 0;
 
     addItem({
@@ -111,10 +112,11 @@ export default function ServicosPage() {
                     className="bg-brand-graphite border border-brand-white/5 flex flex-col group h-full"
                   >
                     <div className="relative aspect-[16/9] overflow-hidden bg-brand-graphite">
-                      <img
+                      <Image
                         src={service.imageUrl || '/assets/images/hero_car_detail_1793147455460.jpg'}
                         alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                         referrerPolicy="no-referrer"
                       />
                     </div>

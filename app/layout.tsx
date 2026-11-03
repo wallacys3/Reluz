@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import { CartProvider } from '@/components/CartContext';
 
 export const metadata: Metadata = {
   title: 'Reluz Estética Automotiva | Seu carro merece brilhar',
@@ -18,8 +19,6 @@ export const metadata: Metadata = {
     description: 'Especialistas em detalhamento automotivo premium. Polimento, higienização e proteção cerâmica com tecnologia de ponta.',
   },
 };
-
-import { CartProvider } from '@/components/CartContext';
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
